@@ -21,9 +21,9 @@ store as a set of files and the changes made to each file over time
 (this is commonly described as ``delta-based`` version control).
 
 .. figure:: pictures/deltas.png
-            :alt: Storing data as changes to a base version of each file
+    :alt: Storing data as changes to a base version of each file
 
-            Storing data as changes to a base version of each file
+    Storing data as changes to a base version of each file
 
 Git doesn't think of or store its data this way. Instead, Git thinks of its data
 more like a series of snapshots of a miniature filesystem. With Git, every time
@@ -34,9 +34,9 @@ again, just a link to the previous identical file it has already stored. Git
 thinks about its data more like a **stream of snapshots**.
 
 .. figure:: pictures/snapshots.png
-            :alt: Storing data as snapshots of the project over time
+    :alt: Storing data as snapshots of the project over time
 
-             Storing data as snapshots of the project over time
+    Storing data as snapshots of the project over time
 
 The Three States
 ----------------
@@ -64,12 +64,41 @@ This leads us to the three main sections of a Git project:
      copied when you clone a repository from another computer.
 
 .. figure:: pictures/areas.png
-            :alt: Working tree, staging area, and Git directory
+    :alt: Working tree, staging area, and Git directory
 
-            Working tree, staging area, and Git directory
+    Working tree, staging area, and Git directory
 
-Get and set repository or global options
-========================================
+Getting Help
+============
+
+If you ever need help while using Git, there are three equivalent ways to get
+the comprehensive manual page (manpage) help for any of the Git commands:
+
+.. code-block:: console
+
+    $ git help <verb>
+    $ git <verb> --help
+    $ man git-<verb>
+
+For example, you can get the manpage help for the git config command by running
+these:
+
+.. code-block:: console
+
+    $ git help config
+    $ git config --help
+    $ man git-config
+
+In addition, if you don’t need the full-blown manpage help, but just need a
+quick refresher on the available options for a Git command, you can ask for the
+more concise "help" output with the ``-h`` option:
+
+.. code-block:: console
+
+    $ git <verb> -h
+
+Git Configuration: Get and set repository or global options
+===========================================================
 
 ``git config`` lets you get and set configuration variables that control all
 aspects of how Git looks and operates. These variable can be stored in three
@@ -90,23 +119,39 @@ different places:
      option, but that is in fact the default. Unsurprisingly, you need to be
      located somewhere in a Git repository for this option to work properly.
 
-
-
 Each level overrides values in the previous level, so values in ``.git/config``
 trump those in ``[path]/etc/gitconfig``.
 
 List settings and where they are coming from
 --------------------------------------------
 
-.. code-block:: man
-
-    -l, --list
-           List all variables set in config file, along with their values.
-
-    --show-origin
-           Augment the output of all queried config options with the origin type (file, standard input, blob, command line) and the actual origin
-           (config file path, ref, or blob id if applicable).
-
 .. code-block:: console
 
     $ git config --list --show-origin
+
+.. code-block:: man
+
+    -l, --list
+        List all variables set in config file, along with their values.
+
+    --show-origin
+        Augment the output of all queried config options with the origin type
+        (file, standard input, blob, command line) and the actual origin
+        (config file path, ref, or blob id if applicable).
+
+Identity Configuration
+----------------------
+
+.. code-block:: console
+
+    $ git config --global user.name "John Doe"
+    $ git config --global user.email johndoe@example.com
+
+Editor Configuration
+--------------------
+
+.. code-block:: console
+
+    $ git config --global core.editor emacs
+
+Default Branch Name
