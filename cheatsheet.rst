@@ -122,12 +122,23 @@ different places:
 Each level overrides values in the previous level, so values in ``.git/config``
 trump those in ``[path]/etc/gitconfig``.
 
-List settings and where they are coming from
---------------------------------------------
+Checking your settings and where they are coming from
+-----------------------------------------------------
+
+If you want to check your configuration settings, you can use the following
+command to list all the settings Git can find at that point:
 
 .. code-block:: console
 
     $ git config --list --show-origin
+
+You can also check what Git thinks a specific key’s value is by typing
+``git config <key>``, e.g.,:
+
+.. code-block:: console
+
+    $ git config --show-origin user.name
+    file:/home/papiag/.gitconfig    Gianluigi Papia
 
 .. code-block:: man
 
@@ -144,7 +155,7 @@ Identity Configuration
 
 .. code-block:: console
 
-    $ git config --global user.name "John Doe"
+    $ git config --global user.name "Gianluigi Papia"
     $ git config --global user.email johndoe@example.com
 
 Editor Configuration
@@ -155,3 +166,14 @@ Editor Configuration
     $ git config --global core.editor emacs
 
 Default Branch Name
+===================
+
+By default Git will create a branch called ``master`` when you create a new
+repository with ``git init``. From Git version 2.28 onwards, you can set a
+different name for the initial branch.
+
+To set main as the default branch name do:
+
+.. code-block:: console
+
+    $ git config --global init.defaultBranch main
