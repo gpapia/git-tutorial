@@ -80,8 +80,8 @@ the comprehensive manual page (manpage) help for any of the Git commands:
     $ git <verb> --help
     $ man git-<verb>
 
-For example, you can get the manpage help for the git config command by running
-these:
+For example, you can get the manpage help for the ``git config`` command by
+running one of these:
 
 .. code-block:: console
 
@@ -89,7 +89,7 @@ these:
     $ git config --help
     $ man git-config
 
-In addition, if you don’t need the full-blown manpage help, but just need a
+In addition, if you don't need the full-blown manpage help, but just need a
 quick refresher on the available options for a Git command, you can ask for the
 more concise "help" output with the ``-h`` option:
 
