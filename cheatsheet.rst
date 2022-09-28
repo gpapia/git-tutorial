@@ -97,8 +97,19 @@ more concise "help" output with the ``-h`` option:
 
     $ git <verb> -h
 
-Initializing a Repository in an Existing Directory
-==================================================
+Create an empty Git repository or reinitialize an existing one
+==============================================================
+
+``git init`` command creates an empty Git repository - basically a ``.git``
+directory with subdirectories for objects, ``refs/heads``, ``refs/tags``, and
+``template`` files. An initial ``HEAD`` file that references the ``HEAD`` of the
+master branch is also created.
+
+If the ``$GIT_DIR`` environment variable is set then it specifies a path to use
+instead of ``./.git`` for the base of the repository.
+
+Running ``git init`` in an existing repository is safe. It will not overwrite
+things that are already there.
 
 If you have a project directory that is currently not under version control and
 you want to start controlling it with Git, you first need to go to that
@@ -108,14 +119,92 @@ project's directory and type:
 
     $ git init
 
-This creates a new subdirectory named ``.git`` that contains all of your
-necessary repository files — a Git repository skeleton. At this point, nothing
-in your project is tracked yet.
+At this point, nothing in your project is tracked yet.
 
-Cloning an Existing Repository
+Clone a repository into a new directory
+=======================================
+
+``git clone`` clones a repository into a newly created directory,
+creates remote-tracking branches for each branch in the cloned repository
+(visible using ``git branch --remotes``), and creates and checks out an initial
+branch that is forked from the cloned repository's currently active branch.
+
+After the clone, a plain git fetch without arguments will update all the
+remote-tracking branches, and a git pull without arguments will in addition
+merge the remote master branch into the current master branch, if any.
+
+This default configuration is achieved by creating references to the remote
+branch heads under ``refs/remotes/origin`` and by initializing
+``remote.origin.url`` and ``remote.origin.fetch`` configuration variables.
+
+You clone a repository with ``git clone <repository> <directory>``. For example,
+if you want to clone this Git tutorial, you can do so like this:
+
+.. code-block:: console
+
+    # Clone into `mygit-tutorial` directory (should not exist or be empty)
+    $ git clone git@github.com:gpapia/git-tutorial.git mygit-tutorial
+    # Clone into `git-tutorial` directory
+    $ git clone git@github.com:gpapia/git-tutorial.git
+
+.. code-block:: man
+
+    <repository>
+        The (possibly remote) repository to clone from.
+
+    <directory>
+        The name of a new directory to clone into. The "humanish" part of the
+        source repository is used if no directory is explicitly given (``repo``
+        for ``/path/to/repo.git`` and ``foo`` for ``host.xz:foo/.git``). Cloning
+        into an existing directory is only allowed if the directory is empty.
+
+Add file contents to the index
 ==============================
 
-TODO
+``git add`` command updates the index using the current content found in the
+working tree, to prepare the content staged for the next commit. It typically
+adds the current content of existing paths as a whole, but with some options it
+can also be used to add content with only part of the changes made to the
+working tree files applied, or remove paths that do not exist in the working
+tree anymore.
+
+The "index" holds a snapshot of the content of the working tree, and it is this
+snapshot that is taken as the contents of the next commit. Thus after making any
+changes to the working tree, and before running the commit command, you **must**
+use the ``add`` command to add any new or modified files to the index.
+
+This command can be performed multiple times before a commit. It only adds the
+content of the specified file(s) at the time the add command is run; if you want
+subsequent changes included in the next commit, then you must run ``git add``
+again to add the new content to the index.
+
+The ``git add`` command will not add ignored files by default. If any ignored
+files were explicitly specified on the command line, git add will fail with a
+list of ignored files. Ignored files reached by directory recursion or filename
+globbing performed by Git (quote your globs before the shell) will be silently
+ignored. The ``git add`` command can be used to add ignored files with the
+``-f`` (force) option.
+
+You add files with ``git add <pathspec>``. For example, if you want to add
+the ``.gitignore`` file, all files ending with ``.rst``, and all files
+inside the ``pictures`` directory, you can do so like this:
+
+.. code-block:: console
+
+    $ git add .gitignore
+    $ git add *.rst
+    $ git add pictures/
+
+.. code-bloc:: man
+
+    <pathspec>...
+        Files to add content from. Fileglobs (e.g. ``*.c``) can be given to add
+        all matching files. Also a leading directory name (e.g. ``dir`` to add
+        ``dir/file1`` and ``dir/file2``) can be given to update the index to
+        match the current state of the directory as a whole (e.g. specifying
+        ``dir`` will record not just a file ``dir/file1`` modified in the
+        working tree, a file ``dir/file2`` added to the working tree, but also a
+        file ``dir/file3`` removed from the working tree).
 
 Git Configuration: Get and set repository or global options
 ===========================================================
