@@ -5,12 +5,13 @@ Changing author/committer(/tagger?) information
 If you messed up and need to change the email of the author, you should proceed
 like explained here.
 
-The ``filter-repo`` git tool will be used which is is a versatile tool for
-rewriting history. It roughly falls into the same space of tool as
-``filter-branch`` but without the capitulation-inducing poor performance,
-with far more capabilities, and with a design that scales usability-wise beyond
-trivial rewriting cases. ``filter-repo`` is now recommended by the git
-project instead of ``filter-branch``.
+The ``filter-repo`` git tool (`<https://github.com/newren/git-filter-repo/>`_)
+will be used which is a versatile tool for rewriting history. It roughly falls
+into the same space of tool as ``filter-branch`` but without the
+capitulation-inducing poor performance, with far more capabilities, and with a
+design that scales usability-wise beyond trivial rewriting cases.
+``filter-repo`` is now recommended by the git project instead of
+``filter-branch``.
 
 While most users will probably just use ``filter-repo`` as a simple command line
 tool (and likely only use a few of its flags), at its core ``filter-repo``
@@ -18,8 +19,8 @@ contains a library for creating history rewriting tools. As such, users with
 specialized needs can leverage it to quickly create entirely new history
 rewriting tools.
 
-Attention
-=========
+Warning
+=======
 
 Using ``filter-repo`` is relatively simple, but rewriting history is part of a
 larger discussion in terms of collaboration. When you rewrite history, the old
@@ -94,16 +95,19 @@ So, installation might look something like the following:
     $ git clone https://github.com/newren/git-filter-repo.git
     $ cd git-filter-repo
     $ make snag_docs  # Copy the generated documentation files from ``docs`` branch
-    $ cp -a git-filter-repo $(git --exec-path)
-    $ cp -a git-filter-repo.1 $(git --man-path)/man1 && mandb
-    $ cp -a git-filter-repo.html $(git --html-path)  # Only html version of help
-    $ ln -s $(git --exec-path)/git-filter-repo \
+    $ sudo cp -a git-filter-repo $(git --exec-path)
+    $ sudo cp -a git-filter-repo.1 $(git --man-path)/man1 && mandb
+    $ sudo cp -a git-filter-repo.html $(git --html-path)  # Only html version of help
+    $ sudo ln -s $(git --exec-path)/git-filter-repo \
           $(python -c "import site; print(site.getsitepackages()[0])")/git_filter_repo.py
 
 The first path from ``(site.getsitepackages()`` was used, but you should use
-the more appropriate one for your case.
+the most appropriate one for your case.
 
 You should also change the owner, group and permission of the copied files.
+
+Changing author/committer(/tagger?) information
+===============================================
 
 Changing the email information from ``root@localhost`` to ``john@example.com``
 is done by running the following command:
@@ -119,5 +123,6 @@ this repo is no longer compatible with the original. Finally, another minor
 benefit is this allows users to push with the ``--mirror`` option to their new
 home without accidentally sending remote tracking branches.
 
-For example, with GitHub, you should first remove the repository inside GitHub,
-second create a new one, and then push the corrected git directory.
+For example, the easiest way with GitHub is to first remove the repository
+inside GitHub, second create a new one, third add the remote directory and
+finally push back the corrected git directory.
