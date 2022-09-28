@@ -142,9 +142,9 @@ if you want to clone this Git tutorial, you can do so like this:
 
 .. code-block:: console
 
-    # Clone into `mygit-tutorial` directory (should not exist or be empty)
+    $ # Clone into `mygit-tutorial` directory (should not exist or be empty)
     $ git clone git@github.com:gpapia/git-tutorial.git mygit-tutorial
-    # Clone into `git-tutorial` directory
+    $ # Clone into `git-tutorial` directory
     $ git clone git@github.com:gpapia/git-tutorial.git
 
 .. code-block:: man
