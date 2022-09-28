@@ -95,8 +95,17 @@ different places:
 Each level overrides values in the previous level, so values in ``.git/config``
 trump those in ``[path]/etc/gitconfig``.
 
-View all of your settings and where they are coming from
---------------------------------------------------------
+List settings and where they are coming from
+--------------------------------------------
+
+.. code-block:: man
+
+    -l, --list
+           List all variables set in config file, along with their values.
+
+    --show-origin
+           Augment the output of all queried config options with the origin type (file, standard input, blob, command line) and the actual origin
+           (config file path, ref, or blob id if applicable).
 
 .. code-block:: console
 
