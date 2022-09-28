@@ -97,6 +97,26 @@ more concise "help" output with the ``-h`` option:
 
     $ git <verb> -h
 
+Initializing a Repository in an Existing Directory
+==================================================
+
+If you have a project directory that is currently not under version control and
+you want to start controlling it with Git, you first need to go to that
+project's directory and type:
+
+.. code-block:: console
+
+    $ git init
+
+This creates a new subdirectory named ``.git`` that contains all of your
+necessary repository files — a Git repository skeleton. At this point, nothing
+in your project is tracked yet.
+
+Cloning an Existing Repository
+==============================
+
+TODO
+
 Git Configuration: Get and set repository or global options
 ===========================================================
 
@@ -166,7 +186,7 @@ Editor Configuration
     $ git config --global core.editor emacs
 
 Default Branch Name
-===================
+-------------------
 
 By default Git will create a branch called ``master`` when you create a new
 repository with ``git init``. From Git version 2.28 onwards, you can set a
