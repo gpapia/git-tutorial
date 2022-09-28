@@ -89,3 +89,15 @@ different places:
      can force Git to read from and write to this file with the ``--local``
      option, but that is in fact the default. Unsurprisingly, you need to be
      located somewhere in a Git repository for this option to work properly.
+
+
+
+Each level overrides values in the previous level, so values in ``.git/config``
+trump those in ``[path]/etc/gitconfig``.
+
+View all of your settings and where they are coming from
+--------------------------------------------------------
+
+.. code-block:: console
+
+    $ git config --list --show-origin
