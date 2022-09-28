@@ -96,12 +96,12 @@ So, installation might look something like the following:
     $ cd git-filter-repo
     $ make snag_docs  # Copy the generated documentation files from ``docs`` branch
     $ sudo cp -a git-filter-repo $(git --exec-path)
-    $ sudo cp -a git-filter-repo.1 $(git --man-path)/man1 && mandb
+    $ sudo cp -a git-filter-repo.1 $(git --man-path)/man1 && sudo mandb
     $ sudo cp -a git-filter-repo.html $(git --html-path)  # Only html version of help
     $ sudo ln -s $(git --exec-path)/git-filter-repo \
           $(python -c "import site; print(site.getsitepackages()[0])")/git_filter_repo.py
 
-The first path from ``(site.getsitepackages()`` was used, but you should use
+The first path from ``site.getsitepackages()`` was used, but you should use
 the most appropriate one for your case.
 
 You should also change the owner, group and permission of the copied files.
