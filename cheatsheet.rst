@@ -36,8 +36,8 @@ more concise "help" output with the ``-h`` option:
 
     $ git <verb> -h
 
-Create an empty Git repository or reinitialize an existing one
-==============================================================
+Git Init: Create an empty Git repository or reinitialize an existing one
+========================================================================
 
 ``git init`` command creates an empty Git repository - basically a ``.git``
 directory with subdirectories for objects, ``refs/heads``, ``refs/tags``, and
@@ -60,8 +60,8 @@ project's directory and type:
 
 At this point, nothing in your project is tracked yet.
 
-Clone a repository into a new directory
-=======================================
+Git Clone: Clone a repository into a new directory
+==================================================
 
 ``git clone`` clones a repository into a newly created directory,
 creates remote-tracking branches for each branch in the cloned repository
@@ -97,8 +97,13 @@ if you want to clone this Git tutorial, you can do so like this:
         for ``/path/to/repo.git`` and ``foo`` for ``host.xz:foo/.git``). Cloning
         into an existing directory is only allowed if the directory is empty.
 
-Add file contents to the index
-==============================
+Git Status: Show the working tree status
+========================================
+
+TODO
+
+Git Add: Add file contents to the index
+=======================================
 
 ``git add`` command updates the index using the current content found in the
 working tree, to prepare the content staged for the next commit. It typically
@@ -145,8 +150,8 @@ inside the ``pictures`` directory, you can do so like this:
         working tree, a file ``dir/file2`` added to the working tree, but also a
         file ``dir/file3`` removed from the working tree).
 
-Git Configuration: Get and set repository or global options
-===========================================================
+Git Config: Get and set repository or global options
+====================================================
 
 ``git config`` lets you get and set configuration variables that control all
 aspects of how Git looks and operates. These variable can be stored in three
