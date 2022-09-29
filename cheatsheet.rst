@@ -225,7 +225,7 @@ see the textual changes. If you run ``git status -v`` or
 ready to be commited, and if you use the ``-v`` option twice, you get
 also the changes of the working files ready to be staged.
 
-.. code-bloc:: console
+.. code-block:: console
 
     $ git status -v
     [Too long to copy/paste, just test it.]
