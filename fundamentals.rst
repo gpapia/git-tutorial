@@ -67,3 +67,21 @@ This leads us to the three main sections of a Git project:
     :alt: Working tree, staging area, and Git directory
 
     Working tree, staging area, and Git directory
+
+The lifecyle of the status of your files
+----------------------------------------
+
+Each file in your working directory can be in one of two states: ``tracked`` or
+``untracked``.
+
+  * Tracked files are files that were in the last snapshot, as well as any newly
+    staged files; they can be unmodified, modified, or staged. In short, tracked
+    files are files that Git knows about.
+
+  * Untracked files are everything else — any files in your working directory
+    that were not in your last snapshot and are not in your staging area.
+
+.. figure:: pictures/lifecycle.png
+    :alt: The lifecycle of the status of your files
+
+    The lifecycle of the status of your files

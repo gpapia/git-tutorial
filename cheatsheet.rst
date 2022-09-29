@@ -100,7 +100,147 @@ if you want to clone this Git tutorial, you can do so like this:
 Git Status: Show the working tree status
 ========================================
 
-TODO
+``git status`` displays paths that have differences between the index file and
+the current ``HEAD`` commit, paths that have differences between the working
+tree and the index file, and paths in the working tree that are not tracked by
+Git (and are not ignored by ``gitignore(5)``). The first are what you would
+commit by running ``git commit``; the second and third are what you could
+commit by running ``git add`` before running ``git commit``.
+
+You check the status of your files by running ``git status <pathspec>``.
+
+.. code-block:: console
+
+    $ git status
+    On branch master
+    Your branch is ahead of 'origin/master' by 1 commit.
+      (use "git push" to publish your local commits)
+
+    Changes to be committed:
+      (use "git restore --staged <file>..." to unstage)
+            modified:   cheatsheet.rst
+            modified:   fundamentals.rst
+            new file:   pictures/lifecycle.png
+
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git restore <file>..." to discard changes in working directory)
+            modified:   cheatsheet.rst
+
+    Untracked files:
+      (use "git add <file>..." to include in what will be committed)
+            pictures/branch-and-history.png
+
+    $ git status *rst
+    On branch master
+    Your branch is ahead of 'origin/master' by 1 commit.
+      (use "git push" to publish your local commits)
+
+    Changes to be committed:
+      (use "git restore --staged <file>..." to unstage)
+            modified:   cheatsheet.rst
+            modified:   fundamentals.rst
+
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git restore <file>..." to discard changes in working directory)
+            modified:   cheatsheet.rst
+
+Short Status
+------------
+
+While the ``git status`` output is pretty comprehensive, it’s also quite wordy.
+Git also has a short status flag so you can see your changes in a more compact
+way. If you run ``git status -s`` or ``git status --short`` you get a far more
+simplified output from the command:
+
+.. code-block:: console
+
+   $ git status -s
+   MM cheatsheet.rst
+   M  fundamentals.rst
+   A  pictures/lifecycle.png
+   ?? pictures/branch-and-history.png
+
+There are two columns to the output that indicate (if no merge conflict):
+
+  1. The left-hand columns indicates the status of the staging area.
+  2. The right-hand column indicates the status of the working tree.
+
+New files that aren't tracked have a ``??`` next to them. The other
+meanings are the following:
+
+  * ``M`` = modified
+  * ``A`` = added
+  * ``D`` = deleted
+  * ``R`` = renamed
+  * ``C`` = copied
+  * ``U`` = updated but unmerged
+
+.. code-block:: man
+
+    -s, --short
+        Give the output in the short-format.
+
+    Short Format
+        In the short-format, the status of each path is shown as one of these
+        forms
+
+            XY PATH
+            XY ORIG_PATH -> PATH
+
+        where ``ORIG_PATH`` is where the renamed/copied contents came from.
+        ``ORIG_PATH`` is only shown when the entry is renamed or copied. The
+        ``XY`` is a two-letter status code.
+
+        [...]
+
+        For paths with merge conflicts, ``X`` and ``Y`` show the modification
+        states of each side of the merge. For paths that do not have merge
+        conflicts, ``X`` shows the status of the index, and ``Y`` shows the
+        status of the work tree. For untracked paths, ``XY`` are ``??``.
+        Other status codes can be interpreted as follows:
+
+        *   ' ' = unmodified
+
+        *   M = modified
+
+        *   A = added
+
+        *   D = deleted
+
+        *   R = renamed
+
+        *   C = copied
+
+        *   U = updated but unmerged
+
+Verbose Status
+--------------
+
+In some cases, it may be usefull to also show the textual differences between
+files while checking the status. Git has a verbose status flag so you can
+see the textual changes. If you run ``git status -v`` or
+``git status --verbose`` you get the textual changes of the staged files
+ready to be commited, and if you use the ``-v`` option twice, you get
+also the changes of the working files ready to be staged.
+
+.. code-bloc:: console
+
+    $ git status -v
+    [Too long to copy/paste, just test it.]
+
+    $ git status -vv
+    [Even longer, just test it.]
+
+.. code-block:: man
+
+    -v, --verbose
+        In addition to the names of files that have been changed, also show the
+        textual changes that are staged to be committed (i.e., like the output
+        of ``git diff --cached``). If ``-v`` is specified twice, then also show
+        the changes in the working tree that have not yet been staged (i.e.,
+        like the output of git diff).
 
 Git Add: Add file contents to the index
 =======================================
@@ -225,7 +365,9 @@ By default Git will create a branch called ``master`` when you create a new
 repository with ``git init``. From Git version 2.28 onwards, you can set a
 different name for the initial branch.
 
-To set main as the default branch name do:
+GitHub changed the default branch name from ``master`` to ``main`` in mid-2020,
+and other Git hosts followed suit. To set ``main`` as the default branch name
+do:
 
 .. code-block:: console
 
