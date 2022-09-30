@@ -242,7 +242,7 @@ also the changes of the working files ready to be staged.
         the changes in the working tree that have not yet been staged (i.e.,
         like the output of git diff).
 
-Gid Diff: Show changes between commits, commit and working tree, etc
+Git Diff: Show changes between commits, commit and working tree, etc
 ====================================================================
 
 ``git diff`` shows changes between the working tree and the index or a tree,
