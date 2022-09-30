@@ -242,6 +242,123 @@ also the changes of the working files ready to be staged.
         the changes in the working tree that have not yet been staged (i.e.,
         like the output of git diff).
 
+Gid Diff: Show changes between commits, commit and working tree, etc
+====================================================================
+
+``git diff`` shows changes between the working tree and the index or a tree,
+changes between the index and a tree, changes between two trees, changes between
+two blob objects, or changes between two files on disk.
+
+Changes relative to the staging area
+------------------------------------
+
+To see what you've changed but not yet staged, type ``git diff`` with no other
+arguments:
+
+.. code-block:: console
+
+    $ git status -s
+    M  README.rst
+     M cheatsheet.rst
+    ?? pictures/branch-and-history.png
+    $ git diff
+    diff --git a/cheatsheet.rst b/cheatsheet.rst
+    index 18d484b..baaf272 100644
+    --- a/cheatsheet.rst
+    +++ b/cheatsheet.rst
+    @@ -242,6 +242,70 @@ also the changes of the working files ready to be staged.
+             the changes in the working tree that have not yet been staged (i.e.,
+             like the output of git diff).
+
+    +Gid Diff: Show changes between commits, commit and working tree, etc
+    +====================================================================
+    +
+    +``git diff`` shows changes between the working tree and the index or a tree,
+    +changes between the index and a tree, changes between two trees, changes between
+    +two blob objects, or changes between two files on disk.
+    +
+    +Changes relative to the staging area
+    +------------------------------------
+    +
+    +To see what you've changed but not yet staged, type ``git diff`` with no other
+    +arguments:
+    +
+    +.. code-block:: console
+    +
+    +    $ git diff
+    +
+    +.. code-block:: man
+    +
+    +    git diff [<options>] [--] [<path>...]
+    +        This form is to view the changes you made relative to the index (staging
+    +        area for the next commit). In other words, the differences are what you
+    +        could tell Git to further add to the index but you still haven't. You can
+    +        stage these changes by using ``git add``.
+    +
+    Git Add: Add file contents to the index
+    =======================================
+
+.. code-block:: man
+
+    git diff [<options>] [--] [<path>...]
+        This form is to view the changes you made relative to the index (staging
+        area for the next commit). In other words, the differences are what you
+        could tell Git to further add to the index but you still haven't. You can
+        stage these changes by using ``git add``.
+
+Changes staged for the next commit
+----------------------------------
+
+If you want to see what you've staged that will go into your next commit,
+you can use ``git diff --staged <commit>`` (or ``--cached`` which is a synonym).
+This command compares your staged changes to ``<commit>`` or your last commit
+if you don't specify any ``<commit>``:
+
+.. code-block:: console
+
+    $ git status -s
+    M  README.rst
+     M cheatsheet.rst
+    ?? pictures/branch-and-history.png
+    $ git diff --staged
+    diff --git a/README.rst b/README.rst
+    index 23525fc..e4c86fc 100644
+    --- a/README.rst
+    +++ b/README.rst
+    @@ -1,3 +1,5 @@
+    -This Git Tutorial is my exercices based on "The entire Pro Git" book, written
+    -by Scott Chacon and Ben Straub, published by Apress and available at
+    +This Git Tutorial is based on "The entire Pro Git" book, written by Scott Chacon
+    +and Ben Straub, published by Apress and available at
+     `<https://git-scm.com/book/en/v2>`_.
+    +
+    +It will serve as a sticky note for my use of Git.
+    $ git diff --staged 84ea20d31f0870920d3533463aa69198b7cba51b
+    diff --git a/README.rst b/README.rst
+    index e6f982e..e4c86fc 100644
+    --- a/README.rst
+    +++ b/README.rst
+    @@ -1,5 +1,5 @@
+    -This Git Tutorial is my exercices based on "The entire Pro Git" book, written
+    -by Scott Chacon and Ben Straub, published by Apress and available at
+    +This Git Tutorial is based on "The entire Pro Git" book, written by Scott Chacon
+    +and Ben Straub, published by Apress and available at
+     `<https://git-scm.com/book/en/v2>`_.
+    -All content is licensed under the `Creative Commons Attribution Non Commercial
+    -Share Alike 3.0 license <https://creativecommons.org/licenses/by-nc-sa/3.0/>`_.
+    +
+    +It will serve as a sticky note for my use of Git.
+
+.. code-block:: man
+
+    git diff [<options>] --cached [<commit>] [--] [<path>...]
+        This form is to view the changes you staged for the next commit relative
+        to the named ``<commit>``. Typically you would want comparison with the
+        latest commit, so if you do not give ``<commit>``, it defaults to
+        ``HEAD``. If ``HEAD`` does not exist (e.g. unborn branches) and
+        ``<commit>`` is not given, it shows all staged changes. ``--staged`` is
+        a synonym of ``--cached``.
+
 Git Add: Add file contents to the index
 =======================================
 
