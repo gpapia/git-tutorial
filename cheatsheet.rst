@@ -407,6 +407,81 @@ inside the ``pictures`` directory, you can do so like this:
         working tree, a file ``dir/file2`` added to the working tree, but also a
         file ``dir/file3`` removed from the working tree).
 
+Git Commit: Record changes to the repository
+============================================
+
+`git commit` creates a new commit containing the current contents of the index
+and the given log message describing the changes. The new commit is a direct
+child of ``HEAD``, usually the tip of the current branch, and the branch is
+updated to point to it (unless no branch is associated with the working
+tree, in which case ``HEAD`` is "detached" as described in ``git-checkout(1)``).
+
+
+The content to be committed can be specified in several ways:
+
+  1. by using ``git-add(1)`` to incrementally "add" changes to the index before
+     using the ``commit`` command (Note: even modified files must be "added");
+  2. by using ``git-rm(1)`` to remove files from the working tree and the index,
+     again before using the commit command;
+  3. by listing files as arguments to the commit command (without
+     ``--interactive`` or ``--patch switch``), in which case the commit will
+     ignore changes staged in the index, and instead record the current content
+     of the listed files (which must already be known to Git);
+  4. by using the ``-a`` switch with the commit command to automatically "add"
+     changes from all known files (i.e. all files that are already listed in
+     the index) and to automatically "rm" files in the index that have been
+     removed from the working tree, and then perform the actual commit;
+  5. by using the ``--interactive`` or ``--patch`` switches with the commit
+     command to decide one by one which files or hunks should be part of the
+     commit in addition to contents in the index, before finalizing the
+     operation. See the “Interactive Mode” section of ``git-add(1)`` to learn
+     how to operate these modes.
+
+The ``--dry-run`` option can be used to obtain a summary of what is included by
+any of the above for the next commit by giving the same set of parameters
+(options and paths).
+
+If you make a commit and then find a mistake immediately after that, you can
+recover from it with ``git reset``.
+
+When your staging area is set up the way you want it, you can commit your
+changes. Remember that anything that is still unstaged — any files you have
+created or modified that you haven't run git add on since you edited them —
+won’t go into this commit. They will stay as modified files on your disk.
+In this case, let's say that the last time you ran git status, you saw that
+everything was staged, so you're ready to commit your changes. The simplest way
+to commit is to type ``git commit``:
+
+.. code-block:: console
+
+    $ git status -s
+    M  cheatsheet.rst
+    ?? pictures/branch-and-history.png
+    $ # The `git commit` command will launch your editor of choice
+    $ git commit
+
+Note: the launched editor his is set by your shell's ``EDITOR`` environment
+      variable — usually vim or emacs, although you can configure it with
+      whatever you want using the ``git config --global core.editor`` command
+      (see. ``git config`` command).
+
+The editor displays the following text:
+
+.. code-block:: console
+
+  # Please enter the commit message for your changes. Lines starting
+  # with '#' will be ignored, and an empty message aborts the commit.
+  #
+  # On branch master
+  # Your branch is up to date with 'origin/master'.
+  #
+  # Changes to be committed:
+  #       modified:   cheatsheet.rst
+  #
+  # Untracked files:
+  #       pictures/branch-and-history.png
+  #
+
 Git Config: Get and set repository or global options
 ====================================================
 
